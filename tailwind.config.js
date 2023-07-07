@@ -8,10 +8,15 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        amazon_blue: {
-          light: "#232F3E",
-          DEFAULT: "#131921",
+        'portreal-blue': {
+          light: "#1B6B93",
+          DEFAULT: "#164B60",
         },
+        'shopping-cart':{
+          light:"#DDE6ED",
+          DEFAULT: "#526D82",
+        } ,
+        'light-grey': "#9DB2BF"
       },
     },
   },
