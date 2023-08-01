@@ -34,7 +34,7 @@ const Product = ({id, title, description, price, category, image}) => {
           <ShoppingBagIcon className="h-5" />
           <p className="ml-2">Add to Cart</p>
         </div>
-        <div className="h-8 bg-white text-md text-black rounded-md p-1 font-semibold text-md">
+        <div className="h-8 bg-white text-md text-black rounded-md p-1 font-bold text-md">
           <Currency quantity={price} currency="USD" />
         </div>
       </div>

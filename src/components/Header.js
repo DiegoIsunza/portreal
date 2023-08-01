@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 
 import images from '../assets';
+import { useSession, signIn, signOut } from "next-auth/react";
 
 import {
     MenuIcon,
-    XIcon,
     SearchIcon,
     ShoppingCartIcon,
 } from '@heroicons/react/outline';
@@ -21,6 +21,8 @@ const defaultOption = options[0];
 
 function Header() {
     // const [welcomeMessage, setWelcomeMessage] = useState(true);
+  const { data: session } = useSession();
+  console.log(session?.user?.image);
   return (
     <header>
         {/* <div className={`flex justify-center items-center space-x-3 p-1 pl-6 bg-portreal-blue-light text-white text-sm ${welcomeMessage  ? 'flex' : 'hidden'}`}>
@@ -57,14 +59,16 @@ function Header() {
 
                 <div className="relative link flex items-center bg-shopping-cart-light p-2 rounded-xl">
                     <span className="absolute -top-1 -right-1 h-4 w-4 bg-yellow-400 text-center rounded-full text-black font-bold">0</span>
-                    <ShoppingCartIcon className="h-5 text-shopping-cart" />
+                    <ShoppingCartIcon className="h-5 text-shopping-cart hover:text-dark_blue" />
                 </div>
 
                 <div className="flex flex-row link gap-2 text-white">
-                    <Image src={images.creator1} height={35} width={35} className="rounded-full" />
-                    <div className="flex flex-col">
-                        <p className="font-normal">Hi, Welcome!</p>
-                        <p className="font-extrabold md:text-sm">Diego Isunza</p>
+                    {session ? (
+                        <Image src={session?.user?.image} height={35} width={35} className="rounded-full" />
+                    ): null}
+                    <div onClick={!session ? signIn : signOut} className="flex flex-col justify-center">
+                             <p className="font-normal">Hi, Welcome!</p>
+                             <p className="font-extrabold md:text-sm">{session ? session?.user?.name : 'Sign In'}</p>
                     </div>
                 </div>
             </div>

@@ -9,7 +9,7 @@ module.exports = {
     extend: {
       colors: {
         'portreal-blue': {
-          light: "#7B8FA1",
+          light: "#526D82",
           DEFAULT: "#0A2647",
         },
         'shopping-cart':{
