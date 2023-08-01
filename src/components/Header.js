@@ -3,6 +3,7 @@ import Image from 'next/image';
 
 import images from '../assets';
 import { useSession, signIn, signOut } from "next-auth/react";
+import { useRouter } from 'next/router';
 
 import {
     MenuIcon,
@@ -12,6 +13,8 @@ import {
 
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
+import { useSelector } from 'react-redux';
+import { selectItems } from '../slices/basketSlice';
 
 const options = [
  'one', 'two', 'three'
@@ -22,7 +25,11 @@ const defaultOption = options[0];
 function Header() {
     // const [welcomeMessage, setWelcomeMessage] = useState(true);
   const { data: session } = useSession();
-  console.log(session?.user?.image);
+  const router = useRouter();
+  const items = useSelector(selectItems);  
+
+  console.log(items);
+
   return (
     <header>
         {/* <div className={`flex justify-center items-center space-x-3 p-1 pl-6 bg-portreal-blue-light text-white text-sm ${welcomeMessage  ? 'flex' : 'hidden'}`}>
@@ -33,6 +40,7 @@ function Header() {
         
             <div className="mt-2 flex flex-grow sm:flex-grow-0 mr-5">
                 <Image
+                 onClick={() => router.push('/')}
                  src='https://links.papareact.com/f90'
                  width={150}
                  height={40}
@@ -57,8 +65,8 @@ function Header() {
                     <p className="font-extrabold md:text-sm">& Orders</p>
                 </div>
 
-                <div className="relative link flex items-center bg-shopping-cart-light p-2 rounded-xl">
-                    <span className="absolute -top-1 -right-1 h-4 w-4 bg-yellow-400 text-center rounded-full text-black font-bold">0</span>
+                <div onClick={() => router.push('/checkout')} className="relative link flex items-center bg-shopping-cart-light p-2 rounded-xl">
+                    <span className="absolute -top-1 -right-1 h-4 w-4 bg-yellow-400 text-center rounded-full text-black font-bold">{items.length}</span>
                     <ShoppingCartIcon className="h-5 text-shopping-cart hover:text-dark_blue" />
                 </div>
 
